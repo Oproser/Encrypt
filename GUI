@@ -54,7 +54,7 @@ function UILibrary.Load(GUITitle)
 	Drag.Active = true
 	Drag.Parent = Encrypt
 	Drag.Position = UDim2.new(0.454, 0,0.407, 0)
-	Drag.Size = UDim2.new(0.074, 0,0.027, 0)
+	Drag.Size = UDim2.new(0.062, 0,0.022, 0)
 	Drag.BackgroundColor3 = Color3.fromRGB(35, 33, 35)
 	Drag.BackgroundTransparency = 0
 	Drag.BorderSizePixel = 0
@@ -105,7 +105,7 @@ function UILibrary.Load(GUITitle)
 		local Group = Instance.new("Frame")
 		Group.Name = "Group"
 		Group.Parent = List
-		Group.Size = UDim2.new(0, 141,0, 26)
+		Group.Size = UDim2.new(0, 118,0, 19)
 		Group.BackgroundTransparency = 1
 		Group.ZIndex = 1
 
@@ -130,7 +130,7 @@ function UILibrary.Load(GUITitle)
 		Tab.Parent = List
 		Tab.BorderColor3 = Color3.fromRGB(17, 255, 0)
 		Tab.BackgroundColor3 = Color3.fromRGB(220, 67, 103)
-		Tab.Size = UDim2.new(0, 141,0, 26)
+		Tab.Size = UDim2.new(0, 118,0, 19)
 		Tab.BackgroundTransparency = 1
 		Tab.BorderSizePixel = 0
 		Tab.ZIndex = 1
