@@ -60,7 +60,7 @@ function UILibrary.Load(GUITitle)
 	Drag.BorderSizePixel = 0
 	Drag.Draggable = true
 	Drag.ZIndex = 1
-	
+
 	local Border = Instance.new("Frame")
 	Border.Name = "Border"
 	Border.Parent = Drag
@@ -70,7 +70,7 @@ function UILibrary.Load(GUITitle)
 	Border.BackgroundTransparency = 1
 	Border.BorderSizePixel = 0
 	Border.ZIndex = 0
-	
+
 	local Inside = Instance.new("Frame")
 	Inside.Name = "Inside"
 	Inside.Parent = Border
@@ -146,6 +146,12 @@ function UILibrary.Load(GUITitle)
 
 	function GroupLibrary.AddTab(TabTitle)
 
+		local LeftLength = 0.03
+
+		local LeftButtonLength = 0.03
+
+		local RightLength = 0.03
+
 		local Tab = Instance.new("ImageButton")
 		Tab.Name = "Tab"
 		Tab.Parent = List
@@ -197,7 +203,7 @@ function UILibrary.Load(GUITitle)
 					for _,Class in pairs(List:GetChildren()) do
 						if Class.ClassName == "ImageButton" and Class.BorderColor3 == Color3.fromRGB(255, 0, 4) and Class ~= Tab then
 							Class.BorderColor3 = Color3.fromRGB(17, 255, 0)
-							
+
 							print("yes")
 							local tween = TweenService:Create(Class,TweenInfo.new(0.4,Enum.EasingStyle.Quad,Enum.EasingDirection.Out,0,false,0),{
 								BackgroundTransparency = 1
@@ -253,20 +259,185 @@ function UILibrary.Load(GUITitle)
 		end
 		coroutine.wrap(TabConnect)()
 
+		local ActionLibrary = {}
+
+		function ActionLibrary.AddAction(TabTitle, Side)
+			local PositionX
+			local ActionLength = 0.08
+
+
+
+			if Side == "Left" then
+				if LeftLength ~= 0.03 then
+					LeftLength = LeftLength + 0.08
+				end
+			elseif Side == "Right" then
+				if RightLength ~= 0.03 then
+					RightLength = RightLength + 0.08
+				end
+			end
+
+			local Color = Instance.new("Frame")
+			Color.Name = "Color"
+			Color.Parent = Main
+			Color.BackgroundColor3 = Color3.fromRGB(220, 67, 103)
+			Color.BorderSizePixel = 0
+			Color.ZIndex = 5
+			if Side == "Left" then
+				PositionX = 0.033
+				Color.Position = UDim2.new(PositionX, 0,LeftLength, 0)
+			elseif Side == "Right" then
+				PositionX = 0.517
+				Color.Position = UDim2.new(PositionX, 0,RightLength, 0)
+			end
+			Color.Size = UDim2.new(0.439, 0,0.005, 0)
+
+			local ActionName = Instance.new("TextLabel")
+			ActionName.Name = "TabName"
+			ActionName.Parent = Main
+			if Side == "Left" then
+				PositionX = 0.051
+				ActionName.Position = UDim2.new(PositionX, 0,LeftLength + 0.024, 0)
+				LeftLength = LeftLength + 0.02
+			elseif Side == "Right" then
+				PositionX = 0.536
+				ActionName.Position = UDim2.new(PositionX, 0,RightLength + 0.024, 0)
+				RightLength = RightLength + 0.02
+			end
+			ActionName.Size = UDim2.new(0.4, 0,0.027, 0)
+			ActionName.BackgroundTransparency = 1
+			ActionName.TextColor3 = Color3.fromRGB(198, 197, 198)
+			ActionName.TextSize = 11
+			ActionName.TextXAlignment = "Left"
+			ActionName.Font = "GothamBold"
+			ActionName.Text = TabTitle
+			ActionName.ZIndex = 5
+
+			local Action = Instance.new("Frame")
+			Action.Name = "Action"
+			Action.Parent = Main
+			Action.BackgroundColor3 = Color3.fromRGB(29, 28, 29)
+			Action.BorderSizePixel = 0
+			Action.ZIndex = 4
+			if Side == "Left" then
+				PositionX = 0.033
+				Action.Position = UDim2.new(PositionX, 0,LeftLength - 0.02, 0)
+			elseif Side == "Right" then
+				PositionX = 0.517
+				Action.Position = UDim2.new(PositionX, 0,RightLength - 0.02, 0)
+			end
+			Action.Size = UDim2.new(0.439, 0,0.07, 0)
+
+
+			local ButtonLibrary = {}
+
+			function ButtonLibrary.AddEnable()
+				local Enable = Instance.new("ImageButton")
+				Enable.Name = "List"
+				Enable.Parent = Main
+				Enable.Size = UDim2.new(0.4, 0,0.043, 0)
+
+				if Side == "Left" then
+					Enable.Position = UDim2.new(0.051, 0,LeftLength + 0.04, 0)
+				elseif Side == "Right" then
+					Enable.Position = UDim2.new(0.051, 0,RightLength + 0.04, 0)
+				end
+
+
+				Enable.BackgroundTransparency = 1
+				Enable.ZIndex = 5
+				Enable.Image = ""
+
+				local EnableName = Instance.new("TextLabel")
+				EnableName.Name = "Circle"
+				EnableName.Parent = Enable
+				EnableName.Size = UDim2.new(0.806, 0,0.876, 0)
+				EnableName.Position = UDim2.new(0.104, 0,0.124, 0)
+				EnableName.BackgroundTransparency = 1
+				EnableName.TextColor3 = Color3.fromRGB(73, 74, 75)
+				EnableName.TextSize = 11
+				EnableName.TextXAlignment = "Left"
+				EnableName.Font = "GothamBold"
+				EnableName.Text = "Enable"
+				EnableName.ZIndex = 5
+
+				local Circle = Instance.new("Frame")
+				Circle.Name = "Circle"
+				Circle.Parent = Enable
+				Circle.Size = UDim2.new(0.075, 0,0.587, 0)
+				Circle.BackgroundColor3 = Color3.fromRGB(66, 67, 68)
+				Circle.Position = UDim2.new(0, 0,0.255, 0)
+				Circle.BackgroundTransparency = 0
+				Circle.ZIndex = 5
+
+				local UICorner = Instance.new("UICorner")
+				UICorner.Parent = Circle
+				UICorner.CornerRadius = UDim.new(1000,0)
+
+				Action.Size = UDim2.new(0.439, 0,ActionLength + 0.04, 0)
+				ActionLength = ActionLength + 0.05
+				if Side == "Left" then
+					LeftLength = LeftLength + 0.05
+				elseif Side == "Right" then
+					RightLength = RightLength + 0.05
+				end
+			end
+
+
+
+			function ButtonLibrary.AddKeybind()
+				local Keybind = Instance.new("Frame")
+				Keybind.Name = "List"
+				Keybind.Parent = Main
+				Keybind.Size = UDim2.new(0.4, 0,0.043, 0)
+
+				if Side == "Left" then
+					Keybind.Position = UDim2.new(0.051, 0,LeftLength + 0.04, 0)
+				elseif Side == "Right" then
+					Keybind.Position = UDim2.new(0.051, 0,RightLength + 0.04, 0)
+				end
+
+				Keybind.BackgroundTransparency = 1
+				Keybind.ZIndex = 5
+
+				local KeybindName = Instance.new("TextLabel")
+				KeybindName.Name = "KeybindName"
+				KeybindName.Parent = Keybind
+				KeybindName.Size = UDim2.new(0.338, 0,0.673, 0)
+				KeybindName.Position = UDim2.new(0.001, 0,0.143, 0)
+				KeybindName.BackgroundTransparency = 1
+				KeybindName.TextColor3 = Color3.fromRGB(73, 74, 75)
+				KeybindName.TextSize = 11
+				KeybindName.TextXAlignment = "Left"
+				KeybindName.Font = "GothamBold"
+				KeybindName.Text = "Keybind"
+				KeybindName.ZIndex = 5
+
+				local KeyBack = Instance.new("Frame")
+				KeyBack.Name = "KeyBack"
+				KeyBack.Parent = Keybind
+				KeyBack.Size = UDim2.new(0.662, 0,0.791, 0)
+				KeyBack.BackgroundColor3 = Color3.fromRGB(42, 43, 44)
+				KeyBack.Position = UDim2.new(0.339, 0,0.124, 0)
+				KeyBack.BackgroundTransparency = 0
+				KeyBack.BorderSizePixel = 0
+				KeyBack.ZIndex = 5
+
+				Action.Size = UDim2.new(0.439, 0,ActionLength + 0.04, 0)
+				ActionLength = ActionLength + 0.05
+
+				if Side == "Left" then
+					LeftLength = LeftLength + 0.05
+				elseif Side == "Right" then
+					RightLength = RightLength + 0.05
+				end
+
+
+			end
+			return ButtonLibrary
+		end
+		return ActionLibrary
 	end
---[[
-		Spacer.AutoButtonColor = false
-		Spacer.MouseEnter:Connect(function(x, y)
-			Spacer.BackgroundColor3 = Color3.fromRGB(39, 39, 39)
-		end)
-		Spacer.MouseLeave:Connect(function(x, y)
-			Spacer.BackgroundColor3 = Color3.fromRGB(34, 34, 34)
-		end)
-	--]]
-
-
 	return GroupLibrary
-
-
 end
 return UILibrary
