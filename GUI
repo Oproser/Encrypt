@@ -1,0 +1,251 @@
+--[[
+	 __  __              _____   _   _ 
+	|  \/  |     /\     |_   _| | \ | |
+	| \  / |    /  \      | |   |  \| |
+	| |\/| |   / /\ \     | |   | . ` |
+	| |  | |  / ____ \   _| |_  | |\  |
+	|_|  |_| /_/    \_\ |_____| |_| \_|
+--]]
+local Player = game.Players.LocalPlayer
+local Mouse = Player:GetMouse()
+local TweenService = game:GetService("TweenService")
+local UserInputService = game:GetService("UserInputService")
+local CoreGuiService = game:GetService("CoreGui")
+local RunService = game:GetService("RunService")
+local TextService = game:GetService("TextService")
+
+local TweenTime = 0.1
+local Level = 1
+
+local GlobalTweenInfo = TweenInfo.new(TweenTime)
+local AlteredTweenInfo = TweenInfo.new(TweenTime, Enum.EasingStyle.Sine, Enum.EasingDirection.Out)
+
+local function Tween(GuiObject, Dictionary)
+	local TweenBase = TweenService:Create(GuiObject, GlobalTweenInfo, Dictionary)
+	TweenBase:Play()
+	return TweenBase
+end
+
+local function GetXY(GuiObject)
+	local X, Y = Mouse.X - GuiObject.AbsolutePosition.X, Mouse.Y - GuiObject.AbsolutePosition.Y
+	local MaxX, MaxY = GuiObject.AbsoluteSize.X, GuiObject.AbsoluteSize.Y
+	X, Y = math.clamp(X, 0, MaxX), math.clamp(Y, 0, MaxY)
+	return X, Y, X/MaxX, Y/MaxY
+end
+
+local UILibrary = {}
+
+function UILibrary.Load(GUITitle)
+
+	local Encrypt = Instance.new("ScreenGui")
+	Encrypt.Name = "MainGui"
+	Encrypt.ZIndexBehavior = Enum.ZIndexBehavior.Global
+	Encrypt.ResetOnSpawn = false
+	if game.PlaceId == 8204899140 or RunService:IsStudio() or true == true then
+		Encrypt.Parent = game.Players.LocalPlayer.PlayerGui
+	else
+		Encrypt.Parent = game.Players.LocalPlayer.PlayerGui
+	end
+
+
+	local Drag = Instance.new("Frame")
+	Drag.Name = "Drag"
+	Drag.Selectable = true
+	Drag.Active = true
+	Drag.Parent = Encrypt
+	Drag.Position = UDim2.new(0.454, 0,0.407, 0)
+	Drag.Size = UDim2.new(0.053, 0,0.019, 0)
+	Drag.BackgroundColor3 = Color3.fromRGB(35, 33, 35)
+	Drag.BackgroundTransparency = 0
+	Drag.BorderSizePixel = 0
+	Drag.Draggable = true
+	Drag.ZIndex = 1
+
+	local HubName = Instance.new("TextLabel")
+	HubName.Name = "HubName"
+	HubName.Parent = Drag
+	HubName.Position = UDim2.new(0.058, 0,0, 0)
+	HubName.Size = UDim2.new(0.701, 0,1, 0)
+	HubName.BackgroundTransparency = 1
+	HubName.TextColor3 = Color3.fromRGB(198, 197, 198)
+	HubName.TextSize = 10
+	HubName.TextXAlignment = "Left"
+	HubName.Font = "GothamBold"
+	HubName.Text = GUITitle
+	HubName.ZIndex = 2
+
+	local Main = Instance.new("Frame")
+	Main.Name = "Main"
+	Main.Parent = Drag
+	Main.Position = UDim2.new(1, 0,-0, 0)
+	Main.Size = UDim2.new(3.09, 0,13.741, 0)
+	Main.BackgroundColor3 = Color3.fromRGB(25, 24, 25)
+	Main.BackgroundTransparency = 0
+	Main.BorderSizePixel = 0
+	Main.ZIndex = 1
+
+	local List = Instance.new("Frame")
+	List.Name = "List"
+	List.Parent = Drag
+	List.Position = UDim2.new(0, 0,1, 0)
+	List.Size = UDim2.new(1, 0,12.741, 0)
+	List.BackgroundColor3 = Color3.fromRGB(26, 25, 26)
+	List.BackgroundTransparency = 0
+	List.BorderSizePixel = 0
+	List.ZIndex = 1
+
+	local UIListLayout = Instance.new("UIListLayout")
+	UIListLayout.Parent = List
+	UIListLayout.SortOrder = "LayoutOrder"
+
+	local GroupLibrary = {}
+
+	function GroupLibrary.AddGroup(GroupTitle)
+
+		local Group = Instance.new("Frame")
+		Group.Name = "Group"
+		Group.Parent = List
+		Group.Size = UDim2.new(0, 102,0, 19)
+		Group.BackgroundTransparency = 1
+		Group.ZIndex = 1
+
+		local GroupName = Instance.new("TextLabel")
+		GroupName.Name = "GroupName"
+		GroupName.Parent = Group
+		GroupName.Position = UDim2.new(0.068, 0,0, 0)
+		GroupName.Size = UDim2.new(0.701, 0,1, 0)
+		GroupName.BackgroundTransparency = 1
+		GroupName.TextColor3 = Color3.fromRGB(198, 197, 198)
+		GroupName.TextSize = 10
+		GroupName.TextXAlignment = "Left"
+		GroupName.Font = "GothamBold"
+		GroupName.Text = GroupTitle
+		GroupName.ZIndex = 2
+	end
+
+	function GroupLibrary.AddTab(TabTitle)
+
+		local Tab = Instance.new("ImageButton")
+		Tab.Name = "Tab"
+		Tab.Parent = List
+		Tab.BorderColor3 = Color3.fromRGB(17, 255, 0)
+		Tab.BackgroundColor3 = Color3.fromRGB(220, 67, 103)
+		Tab.Size = UDim2.new(0, 102,0, 19)
+		Tab.BackgroundTransparency = 1
+		Tab.BorderSizePixel = 0
+		Tab.ZIndex = 1
+
+		local TabName = Instance.new("TextLabel")
+		TabName.Name = "TabName"
+		TabName.Parent = Tab
+		TabName.Position = UDim2.new(0.068, 0,0, 0)
+		TabName.Size = UDim2.new(0.701, 0,1, 0)
+		TabName.BackgroundTransparency = 1
+		TabName.TextColor3 = Color3.fromRGB(73, 74, 75)
+		TabName.TextSize = 10
+		TabName.TextXAlignment = "Left"
+		TabName.Font = "GothamBold"
+		TabName.Text = TabTitle
+		TabName.ZIndex = 2
+
+
+
+		Tab.AutoButtonColor = false
+		Tab.MouseEnter:Connect(function(x, y)
+			if Tab.BorderColor3 == Color3.fromRGB(17, 255, 0) then
+				local tween = TweenService:Create(TabName,TweenInfo.new(0.4,Enum.EasingStyle.Quad,Enum.EasingDirection.Out,0,false,0),{
+					TextColor3 = Color3.fromRGB(96, 97, 98)
+				})
+				tween:Play()
+			end
+		end)
+		Tab.MouseLeave:Connect(function(x, y)
+			if Tab.BorderColor3 == Color3.fromRGB(17, 255, 0) then
+				local tween = TweenService:Create(TabName,TweenInfo.new(0.4,Enum.EasingStyle.Quad,Enum.EasingDirection.Out,0,false,0),{
+					TextColor3 = Color3.fromRGB(73, 74, 75)
+				})
+				tween:Play()
+			end
+		end)
+
+		local function TabConnect()
+			Tab.MouseButton1Down:Connect(function(x,y)
+				if Tab.BorderColor3 == Color3.fromRGB(17, 255, 0) then
+					Tab.BorderColor3 = Color3.fromRGB(255, 0, 4)
+
+					for _,Class in pairs(List:GetChildren()) do
+						if Class.ClassName == "ImageButton" and Class.BorderColor3 == Color3.fromRGB(255, 0, 4) and Class ~= Tab then
+							Class.BorderColor3 = Color3.fromRGB(17, 255, 0)
+							
+							print("yes")
+							local tween = TweenService:Create(Class,TweenInfo.new(0.4,Enum.EasingStyle.Quad,Enum.EasingDirection.Out,0,false,0),{
+								BackgroundTransparency = 1
+							})
+							tween:Play()
+							local tween = TweenService:Create(Class.TabName,TweenInfo.new(0.4,Enum.EasingStyle.Quad,Enum.EasingDirection.Out,0,false,0),{
+								TextColor3 = Color3.fromRGB(73, 74, 75)
+							})
+							tween:Play()
+							local tween = TweenService:Create(Class.TabName,TweenInfo.new(0.4,Enum.EasingStyle.Quad,Enum.EasingDirection.Out,0,false,0),{
+								Position = UDim2.new(0.068, 0,0, 0)
+							})
+							tween:Play()
+
+
+						end
+					end
+
+
+					local tween = TweenService:Create(TabName,TweenInfo.new(0.4,Enum.EasingStyle.Quad,Enum.EasingDirection.Out,0,false,0),{
+						TextColor3 = Color3.fromRGB(198, 197, 198)
+					})
+					tween:Play()
+
+					local tween = TweenService:Create(Tab,TweenInfo.new(0.4,Enum.EasingStyle.Quad,Enum.EasingDirection.Out,0,false,0),{
+						BackgroundTransparency = 0
+					})
+					tween:Play()
+
+					local tween = TweenService:Create(TabName,TweenInfo.new(0.4,Enum.EasingStyle.Quad,Enum.EasingDirection.Out,0,false,0),{
+						Position = UDim2.new(0.12, 0,0, 0)
+					})
+					tween:Play()
+
+
+				else
+					Tab.BorderColor3 = Color3.fromRGB(17, 255, 0)
+					local tween = TweenService:Create(TabName,TweenInfo.new(0.4,Enum.EasingStyle.Quad,Enum.EasingDirection.Out,0,false,0),{
+						TextColor3 = Color3.fromRGB(73, 74, 75)
+					})
+					tween:Play()
+					local tween = TweenService:Create(TabName,TweenInfo.new(0.4,Enum.EasingStyle.Quad,Enum.EasingDirection.Out,0,false,0),{
+						Position = UDim2.new(0.068, 0,0, 0)
+					})
+					tween:Play()
+
+					local tween = TweenService:Create(Tab,TweenInfo.new(0.4,Enum.EasingStyle.Quad,Enum.EasingDirection.Out,0,false,0),{
+						BackgroundTransparency = 1
+					})
+					tween:Play()
+				end
+			end)
+		end
+		coroutine.wrap(TabConnect)()
+
+	end
+--[[
+		Spacer.AutoButtonColor = false
+		Spacer.MouseEnter:Connect(function(x, y)
+			Spacer.BackgroundColor3 = Color3.fromRGB(39, 39, 39)
+		end)
+		Spacer.MouseLeave:Connect(function(x, y)
+			Spacer.BackgroundColor3 = Color3.fromRGB(34, 34, 34)
+		end)
+	--]]
+
+
+	return GroupLibrary
+
+
+end
+return UILibrary
