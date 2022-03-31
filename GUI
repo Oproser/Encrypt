@@ -60,6 +60,27 @@ function UILibrary.Load(GUITitle)
 	Drag.BorderSizePixel = 0
 	Drag.Draggable = true
 	Drag.ZIndex = 1
+	
+	local Border = Instance.new("Frame")
+	Border.Name = "Border"
+	Border.Parent = Drag
+	Border.Position = UDim2.new(0, 0,0, 0)
+	Border.Size = UDim2.new(4.207, 0,18.413, 0)
+	Border.BackgroundColor3 = Color3.fromRGB(25, 24, 25)
+	Border.BackgroundTransparency = 1
+	Border.BorderSizePixel = 0
+	Border.ZIndex = 0
+	
+	local Inside = Instance.new("Frame")
+	Inside.Name = "Inside"
+	Inside.Parent = Border
+	Inside.Position = UDim2.new(-0.0025, 0,-0.005, 0)
+	Inside.Size = UDim2.new(1.005, 0,1.01, 0)
+	Inside.BackgroundColor3 = Color3.fromRGB(220, 67, 103)
+	Inside.BorderColor3 = Color3.fromRGB(25, 24, 25)
+	Inside.BackgroundTransparency = 0
+	Inside.BorderSizePixel = 1
+	Inside.ZIndex = 0
 
 	local HubName = Instance.new("TextLabel")
 	HubName.Name = "HubName"
@@ -78,7 +99,7 @@ function UILibrary.Load(GUITitle)
 	Main.Name = "Main"
 	Main.Parent = Drag
 	Main.Position = UDim2.new(1, 0,-0, 0)
-	Main.Size = UDim2.new(3.09, 0,13.741, 0)
+	Main.Size = UDim2.new(3.207, 0,18.413, 0)
 	Main.BackgroundColor3 = Color3.fromRGB(25, 24, 25)
 	Main.BackgroundTransparency = 0
 	Main.BorderSizePixel = 0
@@ -88,7 +109,7 @@ function UILibrary.Load(GUITitle)
 	List.Name = "List"
 	List.Parent = Drag
 	List.Position = UDim2.new(0, 0,1, 0)
-	List.Size = UDim2.new(1, 0,12.741, 0)
+	List.Size = UDim2.new(1, 0,17.413, 0)
 	List.BackgroundColor3 = Color3.fromRGB(26, 25, 26)
 	List.BackgroundTransparency = 0
 	List.BorderSizePixel = 0
