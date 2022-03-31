@@ -68,7 +68,7 @@ function UILibrary.Load(GUITitle)
 	HubName.Size = UDim2.new(0.701, 0,1, 0)
 	HubName.BackgroundTransparency = 1
 	HubName.TextColor3 = Color3.fromRGB(198, 197, 198)
-	HubName.TextSize = 13
+	HubName.TextSize = 11
 	HubName.TextXAlignment = "Left"
 	HubName.Font = "GothamBold"
 	HubName.Text = GUITitle
@@ -116,7 +116,7 @@ function UILibrary.Load(GUITitle)
 		GroupName.Size = UDim2.new(0.701, 0,1, 0)
 		GroupName.BackgroundTransparency = 1
 		GroupName.TextColor3 = Color3.fromRGB(198, 197, 198)
-		GroupName.TextSize = 13
+		GroupName.TextSize = 11
 		GroupName.TextXAlignment = "Left"
 		GroupName.Font = "GothamBold"
 		GroupName.Text = GroupTitle
@@ -142,7 +142,7 @@ function UILibrary.Load(GUITitle)
 		TabName.Size = UDim2.new(0.701, 0,1, 0)
 		TabName.BackgroundTransparency = 1
 		TabName.TextColor3 = Color3.fromRGB(73, 74, 75)
-		TabName.TextSize = 13
+		TabName.TextSize = 11
 		TabName.TextXAlignment = "Left"
 		TabName.Font = "GothamBold"
 		TabName.Text = TabTitle
