@@ -195,69 +195,69 @@ function UILibrary.Load(GUITitle)
 			end
 		end)
 
-		local function TabConnect()
-			Tab.MouseButton1Down:Connect(function(x,y)
-				if Tab.BorderColor3 == Color3.fromRGB(17, 255, 0) then
-					Tab.BorderColor3 = Color3.fromRGB(255, 0, 4)
 
-					for _,Class in pairs(List:GetChildren()) do
-						if Class.ClassName == "ImageButton" and Class.BorderColor3 == Color3.fromRGB(255, 0, 4) and Class ~= Tab then
-							Class.BorderColor3 = Color3.fromRGB(17, 255, 0)
+		Tab.MouseButton1Down:Connect(function(x,y)
+			if Tab.BorderColor3 == Color3.fromRGB(17, 255, 0) then
+				Tab.BorderColor3 = Color3.fromRGB(255, 0, 4)
 
-							print("yes")
-							local tween = TweenService:Create(Class,TweenInfo.new(0.4,Enum.EasingStyle.Quad,Enum.EasingDirection.Out,0,false,0),{
-								BackgroundTransparency = 1
-							})
-							tween:Play()
-							local tween = TweenService:Create(Class.TabName,TweenInfo.new(0.4,Enum.EasingStyle.Quad,Enum.EasingDirection.Out,0,false,0),{
-								TextColor3 = Color3.fromRGB(73, 74, 75)
-							})
-							tween:Play()
-							local tween = TweenService:Create(Class.TabName,TweenInfo.new(0.4,Enum.EasingStyle.Quad,Enum.EasingDirection.Out,0,false,0),{
-								Position = UDim2.new(0.068, 0,0, 0)
-							})
-							tween:Play()
+				for _,Class in pairs(List:GetChildren()) do
+					if Class.ClassName == "ImageButton" and Class.BorderColor3 == Color3.fromRGB(255, 0, 4) and Class ~= Tab then
+						Class.BorderColor3 = Color3.fromRGB(17, 255, 0)
+
+						print("yes")
+						local tween = TweenService:Create(Class,TweenInfo.new(0.4,Enum.EasingStyle.Quad,Enum.EasingDirection.Out,0,false,0),{
+							BackgroundTransparency = 1
+						})
+						tween:Play()
+						local tween = TweenService:Create(Class.TabName,TweenInfo.new(0.4,Enum.EasingStyle.Quad,Enum.EasingDirection.Out,0,false,0),{
+							TextColor3 = Color3.fromRGB(73, 74, 75)
+						})
+						tween:Play()
+						local tween = TweenService:Create(Class.TabName,TweenInfo.new(0.4,Enum.EasingStyle.Quad,Enum.EasingDirection.Out,0,false,0),{
+							Position = UDim2.new(0.068, 0,0, 0)
+						})
+						tween:Play()
 
 
-						end
 					end
-
-
-					local tween = TweenService:Create(TabName,TweenInfo.new(0.4,Enum.EasingStyle.Quad,Enum.EasingDirection.Out,0,false,0),{
-						TextColor3 = Color3.fromRGB(198, 197, 198)
-					})
-					tween:Play()
-
-					local tween = TweenService:Create(Tab,TweenInfo.new(0.4,Enum.EasingStyle.Quad,Enum.EasingDirection.Out,0,false,0),{
-						BackgroundTransparency = 0
-					})
-					tween:Play()
-
-					local tween = TweenService:Create(TabName,TweenInfo.new(0.4,Enum.EasingStyle.Quad,Enum.EasingDirection.Out,0,false,0),{
-						Position = UDim2.new(0.12, 0,0, 0)
-					})
-					tween:Play()
-
-
-				else
-					Tab.BorderColor3 = Color3.fromRGB(17, 255, 0)
-					local tween = TweenService:Create(TabName,TweenInfo.new(0.4,Enum.EasingStyle.Quad,Enum.EasingDirection.Out,0,false,0),{
-						TextColor3 = Color3.fromRGB(73, 74, 75)
-					})
-					tween:Play()
-					local tween = TweenService:Create(TabName,TweenInfo.new(0.4,Enum.EasingStyle.Quad,Enum.EasingDirection.Out,0,false,0),{
-						Position = UDim2.new(0.068, 0,0, 0)
-					})
-					tween:Play()
-
-					local tween = TweenService:Create(Tab,TweenInfo.new(0.4,Enum.EasingStyle.Quad,Enum.EasingDirection.Out,0,false,0),{
-						BackgroundTransparency = 1
-					})
-					tween:Play()
 				end
-			end)
-		end
-		coroutine.wrap(TabConnect)()
+
+
+				local tween = TweenService:Create(TabName,TweenInfo.new(0.4,Enum.EasingStyle.Quad,Enum.EasingDirection.Out,0,false,0),{
+					TextColor3 = Color3.fromRGB(198, 197, 198)
+				})
+				tween:Play()
+
+				local tween = TweenService:Create(Tab,TweenInfo.new(0.4,Enum.EasingStyle.Quad,Enum.EasingDirection.Out,0,false,0),{
+					BackgroundTransparency = 0
+				})
+				tween:Play()
+
+				local tween = TweenService:Create(TabName,TweenInfo.new(0.4,Enum.EasingStyle.Quad,Enum.EasingDirection.Out,0,false,0),{
+					Position = UDim2.new(0.12, 0,0, 0)
+				})
+				tween:Play()
+
+
+			else
+				Tab.BorderColor3 = Color3.fromRGB(17, 255, 0)
+				local tween = TweenService:Create(TabName,TweenInfo.new(0.4,Enum.EasingStyle.Quad,Enum.EasingDirection.Out,0,false,0),{
+					TextColor3 = Color3.fromRGB(73, 74, 75)
+				})
+				tween:Play()
+				local tween = TweenService:Create(TabName,TweenInfo.new(0.4,Enum.EasingStyle.Quad,Enum.EasingDirection.Out,0,false,0),{
+					Position = UDim2.new(0.068, 0,0, 0)
+				})
+				tween:Play()
+
+				local tween = TweenService:Create(Tab,TweenInfo.new(0.4,Enum.EasingStyle.Quad,Enum.EasingDirection.Out,0,false,0),{
+					BackgroundTransparency = 1
+				})
+				tween:Play()
+			end
+		end)
+
+
 
 		local ActionLibrary = {}
 
@@ -329,10 +329,10 @@ function UILibrary.Load(GUITitle)
 
 
 			local ButtonLibrary = {}
-			
-			
+
+
 			function ButtonLibrary.AddSlider(Name, Side, ConfigurationDictionary, Callback)
-				
+
 				local Slide = Instance.new("Frame")
 				Slide.Name = "Slide"
 				Slide.BorderColor3 = Color3.fromRGB(17, 255, 0)
@@ -345,8 +345,8 @@ function UILibrary.Load(GUITitle)
 				end
 				Slide.BackgroundTransparency = 1
 				Slide.ZIndex = 5
-				
-				
+
+
 				local Slider = Instance.new("ImageButton")
 				Slider.Name = "Slider"
 				Slider.BackgroundColor3 = Color3.fromRGB(42, 43, 44)
@@ -356,7 +356,7 @@ function UILibrary.Load(GUITitle)
 				Slider.Position = UDim2.new(0.002, 0,0.541, 0)
 				Slider.ZIndex = 5
 				Slider.Image = ""
-				
+
 				local SliderName = Instance.new("TextLabel")
 				SliderName.Name = "SliderName"
 				SliderName.Parent = Slide
@@ -369,7 +369,7 @@ function UILibrary.Load(GUITitle)
 				SliderName.Font = "GothamBold"
 				SliderName.Text = Name
 				SliderName.ZIndex = 5
-				
+
 				local SliderNumber = Instance.new("TextLabel")
 				SliderNumber.Name = "SliderNumber"
 				SliderNumber.Parent = Slide
@@ -382,18 +382,18 @@ function UILibrary.Load(GUITitle)
 				SliderNumber.Font = "GothamBold"
 				SliderNumber.Text = "0%"
 				SliderNumber.ZIndex = 5
-				
+
 				Action.Size = UDim2.new(0.439, 0,ActionLength + 0.1, 0)
 				ActionLength = ActionLength + 0.1
-				
+
 				if Side == "Left" then
 					LeftLength = LeftLength + 0.1
 				elseif Side == "Right" then
 					RightLength = RightLength + 0.1
 				end
-				
-				
-				
+
+
+
 --[[
 					local Configuration = ConfigurationDictionary
 					local Minimum = Configuration.Minimum or Configuration.minimum or Configuration.Min or Configuration.min
@@ -486,7 +486,7 @@ function UILibrary.Load(GUITitle)
 				--]]
 			end
 
-			
+
 			function ButtonLibrary.AddEnable(Side, Callback)
 
 				local Color = true
@@ -535,17 +535,17 @@ function UILibrary.Load(GUITitle)
 				UICorner.CornerRadius = UDim.new(1000,0)
 
 				Action.Size = UDim2.new(0.439, 0,ActionLength + 0.06, 0)
-				
-				
+
+
 				ActionLength = ActionLength + 0.06
-				
-				
+
+
 				if Side == "Left" then
 					LeftLength = LeftLength + 0.06
 				elseif Side == "Right" then
 					RightLength = RightLength + 0.06
 				end
-				
+
 
 				local CircleTween = TweenService:Create(Circle,TweenInfo.new(0.4,Enum.EasingStyle.Quad,Enum.EasingDirection.Out,0,false,0),{
 					BackgroundColor3 = Color3.fromRGB(82, 83, 84)
@@ -601,7 +601,7 @@ function UILibrary.Load(GUITitle)
 				local KeybindLibrary = {}
 
 				function KeybindLibrary.AddKeybind()
-					
+
 					print("sunsjsnj")
 
 					local selecting = false
@@ -680,8 +680,8 @@ function UILibrary.Load(GUITitle)
 					elseif Side == "Right" then
 						RightLength = RightLength + 0.06
 					end
-					
-					
+
+
 
 					Keybind.MouseEnter:Connect(function(x, y)
 						local tween = TweenService:Create(KeybindName,TweenInfo.new(0.4,Enum.EasingStyle.Quad,Enum.EasingDirection.Out,0,false,0),{
@@ -704,7 +704,7 @@ function UILibrary.Load(GUITitle)
 						tween:Play()
 					end)
 
-					function InputButton()
+					
 						Keybind.MouseButton1Click:Connect(function(input, gameProcessed)
 							if gameProcessed then return end
 							selecting = false
@@ -747,8 +747,8 @@ function UILibrary.Load(GUITitle)
 								end
 							end
 						end)
-					end
-					coroutine.wrap(InputButton)()
+					
+					
 				end
 				return KeybindLibrary
 
