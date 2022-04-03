@@ -339,9 +339,9 @@ function UILibrary.Load(GUITitle)
 				Slide.Parent = Main
 				Slide.Size = UDim2.new(0.4, 0,0.085, 0)
 				if Side == "Left" then
-					Slide.Position = UDim2.new(0.051, 0,LeftLength + 0.06, 0)
+					Slide.Position = UDim2.new(0.051, 0,LeftLength + 0.065, 0)
 				elseif Side == "Right" then
-					Slide.Position = UDim2.new(0.536, 0,RightLength + 0.06, 0)
+					Slide.Position = UDim2.new(0.536, 0,RightLength + 0.065, 0)
 				end
 				Slide.BackgroundTransparency = 1
 				Slide.ZIndex = 5
@@ -352,10 +352,11 @@ function UILibrary.Load(GUITitle)
 				Slider.BackgroundColor3 = Color3.fromRGB(42, 43, 44)
 				Slider.BorderSizePixel = 0
 				Slider.Parent = Slide
-				Slider.Size = UDim2.new(1.004, 0,0.401, 0)
+				Slider.Size = UDim2.new(1.004, 0,10.401, 0)
 				Slider.Position = UDim2.new(0.002, 0,0.541, 0)
 				Slider.ZIndex = 5
 				Slider.Image = ""
+				Slider.AutoButtonColor = false
 
 				local SliderName = Instance.new("TextLabel")
 				SliderName.Name = "SliderName"
@@ -374,116 +375,107 @@ function UILibrary.Load(GUITitle)
 				SliderNumber.Name = "SliderNumber"
 				SliderNumber.Parent = Slide
 				SliderNumber.Size = UDim2.new(0.128, 0,0.401, 0)
-				SliderNumber.Position = UDim2.new(0.43, 0,0.514, 0)
+				SliderNumber.Position = UDim2.new(0.43, 0,0.541, 0)
 				SliderNumber.BackgroundTransparency = 1
-				SliderNumber.TextColor3 = Color3.fromRGB(73, 74, 75)
+				SliderNumber.TextColor3 = Color3.fromRGB(198, 197, 198)
 				SliderNumber.TextSize = 11
 				SliderNumber.TextXAlignment = "Center"
 				SliderNumber.Font = "GothamBold"
 				SliderNumber.Text = "0%"
 				SliderNumber.ZIndex = 5
+				
+				local KeybindImage = Instance.new("ImageLabel")
+				KeybindImage.Name = "KeybindImage"
+				KeybindImage.Parent = Slider
+				KeybindImage.Size = UDim2.new(0.987, 0,0.715, 0)
+				KeybindImage.Position = UDim2.new(0.013, 0,0.17, 0)
+				KeybindImage.BackgroundTransparency = 1
+				KeybindImage.Image = "rbxassetid://1316045217"
+				KeybindImage.ImageColor3 = Color3.fromRGB(0, 0, 0)
+				KeybindImage.ScaleType = "Slice"
+				KeybindImage.ImageTransparency = 0.86
+				KeybindImage.SliceCenter = Rect.new(10, 10, 118, 118)
+				KeybindImage.ZIndex = 6
 
-				Action.Size = UDim2.new(0.439, 0,ActionLength + 0.1, 0)
-				ActionLength = ActionLength + 0.1
+				Action.Size = UDim2.new(0.439, 0,ActionLength + 0.11, 0)
+				ActionLength = ActionLength + 0.11
 
 				if Side == "Left" then
-					LeftLength = LeftLength + 0.1
+					LeftLength = LeftLength + 0.11
 				elseif Side == "Right" then
-					RightLength = RightLength + 0.1
+					RightLength = RightLength + 0.11
 				end
 
 
 
---[[
-					local Configuration = ConfigurationDictionary
-					local Minimum = Configuration.Minimum or Configuration.minimum or Configuration.Min or Configuration.min
-					local Maximum = Configuration.Maximum or Configuration.maximum or Configuration.Max or Configuration.max
-					local Default = Configuration.Default or Configuration.default or Configuration.Def or Configuration.def
 
-					if Minimum > Maximum then
-						local StoreValue = Minimum
-						Minimum = Maximum
-						Maximum = StoreValue
+				local Configuration = ConfigurationDictionary
+				local Minimum = Configuration.Minimum or Configuration.minimum or Configuration.Min or Configuration.min
+				local Maximum = Configuration.Maximum or Configuration.maximum or Configuration.Max or Configuration.max
+				local Default = Configuration.Default or Configuration.default or Configuration.Def or Configuration.def
+
+				if Minimum > Maximum then
+					local StoreValue = Minimum
+					Minimum = Maximum
+					Maximum = StoreValue
+				end
+
+				Default = math.clamp(Default, Minimum, Maximum)
+
+				local DefaultScale = Default/Maximum
+
+
+				local UIAspectRatioConstraint = Instance.new("UIAspectRatioConstraint")
+				UIAspectRatioConstraint.Parent = Slider
+				UIAspectRatioConstraint.AspectRatio = 10
+
+				local Fill = Instance.new("Frame")
+				Fill.Name = "Fill"
+				Fill.Parent = Slider
+				Fill.BorderSizePixel = 0
+				Fill.BackgroundColor3 = Color3.fromRGB(220, 67, 103)
+				Fill.Size = UDim2.new(DefaultScale, 0, 1, 0)
+				Fill.ZIndex = 5
+
+
+				local dragging = false
+				Slider.MouseButton1Down:Connect(function()
+					dragging = true
+				end)
+				UserInputService.InputChanged:Connect(function()
+					if dragging == true then
+						local X, Y, XScale, YScale = GetXY(Slider)
+						local Value = math.floor(Minimum + ((Maximum - Minimum) * XScale))
+						--Callback(Value)
+						SliderNumber.Text = tostring(Value) .. "%"
+						local TargetSize = UDim2.new(XScale,0,1,0)
+						Tween(Fill, {Size = TargetSize})
 					end
+				end)
+				local SliderMove
+				SliderMove = Mouse.Move:Connect(function()
+					if dragging == true then
+						local X, Y, XScale, YScale = GetXY(Slider)
+						local Value = math.floor(Minimum + ((Maximum - Minimum) * XScale))
+						--Callback(Value)
+						SliderNumber.Text = tostring(Value) .. "%"
+						local TargetSize = UDim2.new(XScale,0,1,0)
+						Tween(Fill, {Size = TargetSize})
+					end
+				end)
+				UserInputService.InputEnded:Connect(function(UserInput)
 
-					Default = math.clamp(Default, Minimum, Maximum)
-
-					local DefaultScale = Default/Maximum
-
-					local Bar = Instance.new("TextButton")
-					Bar.Name = "Bar"
-					Bar.Parent = Parent
-					Bar.BackgroundColor3 = Color3.fromRGB(46, 46, 46)
-					Bar.BorderColor3 = Color3.fromRGB(0, 0, 0)
-					Bar.ClipsDescendants = true
-					Bar.Position = UDim2.new(0.0199999325, 0, 0.0799999088, 0)
-					Bar.Size = UDim2.new(0.940799892, 0, 0.115887977, 0)
-					Bar.Text = ""
-					Bar.AutoButtonColor = false
-
-					local UIAspectRatioConstraint = Instance.new("UIAspectRatioConstraint")
-					UIAspectRatioConstraint.Parent = Bar
-					UIAspectRatioConstraint.AspectRatio = 13.023
-
-					local Fill = Instance.new("Frame")
-					Fill.Name = "Fill"
-					Fill.Parent = Bar
-					Fill.BorderSizePixel = 0
-					Fill.BackgroundColor3 = Color3.fromRGB(79, 79, 79)
-					Fill.Size = UDim2.new(DefaultScale, 0, 1, 0)
-
-					local Changing = Instance.new("TextLabel")
-					Changing.Name = "Changing"
-					Changing.Parent = Bar
-					Changing.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-					Changing.BackgroundTransparency = 1.000
-					Changing.Size = UDim2.new(1, 0, 1, 0)
-					Changing.Font = Enum.Font.GothamBold
-					Changing.Text = Text
-					Changing.TextColor3 = Color3.fromRGB(170, 170, 170)
-					Changing.Text = Text..": "..tostring(Default)
-
-					local dragging = false
-					Bar.MouseButton1Down:Connect(function()
-						dragging = true
-					end)
-					UserInputService.InputChanged:Connect(function()
-						if dragging == true then
-							local X, Y, XScale, YScale = GetXY(Bar)
-							local Value = math.floor(Minimum + ((Maximum - Minimum) * XScale))
-							Callback(Value)
-							Changing.Text = Text..": "..tostring(Value)
-							local TargetSize = UDim2.new(XScale,0,1,0)
-							Tween(Fill, {Size = TargetSize})
-						end
-					end)
-					local SliderMove
-					SliderMove = Mouse.Move:Connect(function()
-						if dragging == true then
-							local X, Y, XScale, YScale = GetXY(Bar)
-							local Value = math.floor(Minimum + ((Maximum - Minimum) * XScale))
-							Callback(Value)
-							Changing.Text = Text..": "..tostring(Value)
-							local TargetSize = UDim2.new(XScale,0,1,0)
-							Tween(Fill, {Size = TargetSize})
-						end
-					end)
-					UserInputService.InputEnded:Connect(function(UserInput)
-
-						if UserInput.UserInputType == Enum.UserInputType.MouseButton1 and dragging == true then
-							--Tween(Fill, {ImageTransparency = 0.7})
-							dragging = false
-							SliderMove:Disconnect()
-							--SliderKill:Disconnect()
-						end
-					end)
-				end
+					if UserInput.UserInputType == Enum.UserInputType.MouseButton1 and dragging == true then
+						--Tween(Fill, {ImageTransparency = 0.7})
+						dragging = false
+						SliderMove:Disconnect()
+						--SliderKill:Disconnect()
+					end
+				end)
 				
 				
 				
 				
-				
-				--]]
 			end
 
 
@@ -534,16 +526,16 @@ function UILibrary.Load(GUITitle)
 				UICorner.Parent = Circle
 				UICorner.CornerRadius = UDim.new(1000,0)
 
-				Action.Size = UDim2.new(0.439, 0,ActionLength + 0.06, 0)
+				Action.Size = UDim2.new(0.439, 0,ActionLength + 0.05, 0)
 
 
-				ActionLength = ActionLength + 0.06
+				ActionLength = ActionLength + 0.05
 
 
 				if Side == "Left" then
-					LeftLength = LeftLength + 0.06
+					LeftLength = LeftLength + 0.05
 				elseif Side == "Right" then
-					RightLength = RightLength + 0.06
+					RightLength = RightLength + 0.05
 				end
 
 
@@ -704,51 +696,51 @@ function UILibrary.Load(GUITitle)
 						tween:Play()
 					end)
 
-					
-						Keybind.MouseButton1Click:Connect(function(input, gameProcessed)
-							if gameProcessed then return end
-							selecting = false
-							if selecting == false then
-								InputButName.Text = ". . ."
-								UserInputService.InputBegan:Connect(function(input, gameProcessed)
-									if selecting == false then
-										local key = string.split(tostring(input.KeyCode), ".")
-										InputButName.Text = key[3]
-										keyn = input.KeyCode
-										wait(0.1)
-										selecting = true
-									end
-								end)
-							end
-						end)
-						UserInputService.InputBegan:Connect(function(input, gameProcessed)
-							if gameProcessed then return end
-							if selecting == true then
-								if input.KeyCode == keyn then
-									if Color == true then
-										Color = not Color
-										Callback(true)
-										CircleTween:Cancel()
-										local tween = TweenService:Create(Circle,TweenInfo.new(0.4,Enum.EasingStyle.Quad,Enum.EasingDirection.Out,0,false,0),{
-											BackgroundColor3 = Color3.fromRGB(220, 67, 103)
-										})
-										tween:Play()
-										Enable.BorderColor3 = Color3.fromRGB(255, 0, 0)
-									else
-										Color = not Color
-										Callback(false)
-										Enable.BorderColor3 = Color3.fromRGB(17, 255, 0)
-										local tween = TweenService:Create(Circle,TweenInfo.new(0.4,Enum.EasingStyle.Quad,Enum.EasingDirection.Out,0,false,0),{
-											BackgroundColor3 = Color3.fromRGB(66, 67, 68)
-										})
-										tween:Play()
-									end
 
+					Keybind.MouseButton1Click:Connect(function(input, gameProcessed)
+						if gameProcessed then return end
+						selecting = false
+						if selecting == false then
+							InputButName.Text = ". . ."
+							UserInputService.InputBegan:Connect(function(input, gameProcessed)
+								if selecting == false then
+									local key = string.split(tostring(input.KeyCode), ".")
+									InputButName.Text = key[3]
+									keyn = input.KeyCode
+									wait(0.1)
+									selecting = true
 								end
+							end)
+						end
+					end)
+					UserInputService.InputBegan:Connect(function(input, gameProcessed)
+						if gameProcessed then return end
+						if selecting == true then
+							if input.KeyCode == keyn then
+								if Color == true then
+									Color = not Color
+									Callback(true)
+									CircleTween:Cancel()
+									local tween = TweenService:Create(Circle,TweenInfo.new(0.4,Enum.EasingStyle.Quad,Enum.EasingDirection.Out,0,false,0),{
+										BackgroundColor3 = Color3.fromRGB(220, 67, 103)
+									})
+									tween:Play()
+									Enable.BorderColor3 = Color3.fromRGB(255, 0, 0)
+								else
+									Color = not Color
+									Callback(false)
+									Enable.BorderColor3 = Color3.fromRGB(17, 255, 0)
+									local tween = TweenService:Create(Circle,TweenInfo.new(0.4,Enum.EasingStyle.Quad,Enum.EasingDirection.Out,0,false,0),{
+										BackgroundColor3 = Color3.fromRGB(66, 67, 68)
+									})
+									tween:Play()
+								end
+
 							end
-						end)
-					
-					
+						end
+					end)
+
+
 				end
 				return KeybindLibrary
 
