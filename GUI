@@ -54,7 +54,7 @@ function UILibrary.Load(GUITitle)
 	Drag.Active = true
 	Drag.Parent = Encrypt
 	Drag.Position = UDim2.new(0.454, 0,0.407, 0)
-	Drag.Size = UDim2.new(0.062, 0,0.022, 0)
+	Drag.Size = UDim2.new(0.044, 0,0.022, 0)
 	Drag.BackgroundColor3 = Color3.fromRGB(35, 33, 35)
 	Drag.BackgroundTransparency = 0
 	Drag.BorderSizePixel = 0
@@ -65,7 +65,7 @@ function UILibrary.Load(GUITitle)
 	Border.Name = "Border"
 	Border.Parent = Drag
 	Border.Position = UDim2.new(0, 0,0, 0)
-	Border.Size = UDim2.new(4.207, 0,18.413, 0)
+	Border.Size = UDim2.new(5.682, 0,18.413, 0)
 	Border.BackgroundColor3 = Color3.fromRGB(25, 24, 25)
 	Border.BackgroundTransparency = 1
 	Border.BorderSizePixel = 0
@@ -75,7 +75,7 @@ function UILibrary.Load(GUITitle)
 	Inside.Name = "Inside"
 	Inside.Parent = Border
 	Inside.Position = UDim2.new(-0.0025, 0,-0.005, 0)
-	Inside.Size = UDim2.new(1.005, 0,1.01, 0)
+	Inside.Size = UDim2.new(1.006, 0,1.01, 0)
 	Inside.BackgroundColor3 = Color3.fromRGB(220, 67, 103)
 	Inside.BorderColor3 = Color3.fromRGB(25, 24, 25)
 	Inside.BackgroundTransparency = 0
@@ -99,7 +99,7 @@ function UILibrary.Load(GUITitle)
 	Main.Name = "Main"
 	Main.Parent = Drag
 	Main.Position = UDim2.new(1, 0,-0, 0)
-	Main.Size = UDim2.new(3.207, 0,18.413, 0)
+	Main.Size = UDim2.new(4.682, 0,18.413, 0)
 	Main.BackgroundColor3 = Color3.fromRGB(25, 24, 25)
 	Main.BackgroundTransparency = 0
 	Main.BorderSizePixel = 0
@@ -126,7 +126,7 @@ function UILibrary.Load(GUITitle)
 		local Group = Instance.new("Frame")
 		Group.Name = "Group"
 		Group.Parent = List
-		Group.Size = UDim2.new(0, 118,0, 19)
+		Group.Size = UDim2.new(0, 84,0, 19)
 		Group.BackgroundTransparency = 1
 		Group.ZIndex = 1
 
@@ -157,7 +157,7 @@ function UILibrary.Load(GUITitle)
 		Tab.Parent = List
 		Tab.BorderColor3 = Color3.fromRGB(17, 255, 0)
 		Tab.BackgroundColor3 = Color3.fromRGB(220, 67, 103)
-		Tab.Size = UDim2.new(0, 118,0, 19)
+		Tab.Size = UDim2.new(0, 84,0, 19)
 		Tab.BackgroundTransparency = 1
 		Tab.BorderSizePixel = 0
 		Tab.ZIndex = 1
